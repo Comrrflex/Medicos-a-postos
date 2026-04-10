@@ -1,0 +1,56 @@
+:root {
+  --bg: #0a1224;
+  --panel: #101b33;
+  --panel-soft: #162643;
+  --text: #e6edf9;
+  --muted: #9db1d3;
+  --accent: #49dcb1;
+  --danger: #ff6b6b;
+  --border: #22385e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top right, #1a2f57 0%, var(--bg) 58%);
+  color: var(--text);
+}
+
+.layout {
+  width: min(1100px, 92%);
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) 1fr;
+  gap: 1rem;
+}
+
+.card,
+.history {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-soft) 100%);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+.subtitle {
+  margin: 0.3rem 0 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+form {
+  display: grid;
+  gap: 0.6rem;
+}
+
