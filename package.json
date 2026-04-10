@@ -1,0 +1,25 @@
+{
+  "name": "clinical-trace-system-backend",
+  "version": "1.0.0",
+  "description": "MVP de rastreabilidade clínica com Express e SQLite",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "clinical",
+    "traceability",
+    "mvp",
+    "healthcare"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "helmet": "^8.1.0",
+    "sqlite3": "^5.1.7"
+  }
+}
+~                                                                                                                       
+~                                                                                                                       
