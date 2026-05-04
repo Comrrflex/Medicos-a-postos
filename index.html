@@ -1,30 +1,3 @@
-Last login: Fri Apr 10 15:21:49 on ttys044
-cd '/Users/rodrigobaptistadasilva/Documents/New project/clinical-trace-system/frontend' && /usr/bin/vim '+call cursor(1,1)' '/Users/rodrigobaptistadasilva/Documents/New project/clinical-trace-system/frontend/index.html'
-rodrigobaptistadasilva@Mac-mini-de-rodrigo ~ % cd '/Users/rodrigobaptistadasilva/Documents/New project/clinical-trace-system/frontend' && /usr/bin/vim '+call cursor(1,1)' '/Users/rodrigobaptistadasilva/Documents/New project/clinical-trace-system/frontend/index.html'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -33,6 +6,7 @@ rodrigobaptistadasilva@Mac-mini-de-rodrigo ~ % cd '/Users/rodrigobaptistadasilva
     <title>Clinical Trace System</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
+
   <body>
     <main class="layout">
       <section class="card">
@@ -54,4 +28,18 @@ rodrigobaptistadasilva@Mac-mini-de-rodrigo ~ % cd '/Users/rodrigobaptistadasilva
 
           <label for="medico">Médico responsável</label>
           <input id="medico" name="medico" placeholder="Nome do médico responsável" required />
-"~/Documents/New project/clinical-trace-system/frontend/index.html" 45L, 1639B
+
+          <button type="submit">Registrar caso</button>
+        </form>
+
+        <div id="feedback" class="feedback"></div>
+
+        <section id="historico">
+          <!-- Histórico será renderizado via JS -->
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
