@@ -1,45 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clinical Trace System</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Médicos a Postos</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: #e2e8f0;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 { color: #38bdf8; }
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
 
-  <body>
-    <main class="layout">
-      <section class="card">
-        <h1>Clinical Trace System</h1>
-        <p class="subtitle">MVP de rastreabilidade clínica</p>
+<h1>Médicos a Postos</h1>
 
-        <form id="caso-form">
-          <label for="paciente">Paciente</label>
-          <input id="paciente" name="paciente" placeholder="Nome do paciente" required />
+<div class="card">
+  <p>MVP do sistema de organização e apoio ao fluxo médico.</p>
+  <p>Status: Em desenvolvimento 🚀</p>
+</div>
 
-          <label for="evidencias">Evidências (exames, sintomas)</label>
-          <textarea id="evidencias" name="evidencias" placeholder="Descreva os dados objetivos do caso"></textarea>
-
-          <label for="raciocinio">Raciocínio clínico</label>
-          <textarea id="raciocinio" name="raciocinio" placeholder="Descreva a linha de raciocínio"></textarea>
-
-          <label for="decisao">Decisão clínica</label>
-          <textarea id="decisao" name="decisao" placeholder="Descreva a decisão tomada" required></textarea>
-
-          <label for="medico">Médico responsável</label>
-          <input id="medico" name="medico" placeholder="Nome do médico responsável" required />
-
-          <button type="submit">Registrar caso</button>
-        </form>
-
-        <div id="feedback" class="feedback"></div>
-
-        <section id="historico">
-          <!-- Histórico será renderizado via JS -->
-        </section>
-      </section>
-    </main>
-
-    <script src="./app.js"></script>
-  </body>
+</body>
 </html>
