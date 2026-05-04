@@ -1,4 +1,142 @@
 # 🩺 Medicos a Postos
+# 🩺 Medicos a Postos
+
+**Clinical Trace System (MVP funcional)**
+
+Sistema web para **registro e rastreabilidade de decisões clínicas**, com frontend dinâmico e API REST.
+
+---
+
+## 🚀 Visão Geral
+
+O **Medicos a Postos** é um MVP funcional que implementa um fluxo completo:
+
+* Entrada de dados clínicos (frontend)
+* Processamento via API REST (backend)
+* Visualização dinâmica de histórico
+* Estrutura inicial de auditoria
+
+> 🔍 O sistema já roda localmente com backend ativo e integração frontend → API.
+
+---
+
+## 🧩 Funcionalidades
+
+* 📌 Cadastro de casos clínicos
+* 🔄 Atualização dinâmica via `fetch`
+* 📊 Listagem de casos (ordem recente)
+* ⚠️ Tratamento de erros no frontend
+* 🛡️ Trilha inicial de auditoria
+* 🌐 API REST
+
+---
+
+## 🏗️ Arquitetura
+
+```bash
+clinical-trace-system/
+  frontend/
+    index.html
+    style.css
+    app.js
+  backend/
+    server.js
+    database.js
+    package.json
+```
+
+---
+
+## ⚙️ Como rodar localmente
+
+### 1. Backend
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+Servidor será iniciado em:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 🔌 Endpoints da API
+
+| Método | Endpoint       | Descrição            |
+| ------ | -------------- | -------------------- |
+| POST   | /api/casos     | Criar caso clínico   |
+| GET    | /api/casos     | Listar casos         |
+| GET    | /api/casos/:id | Consultar por ID     |
+| GET    | /api/auditoria | Trilhas de auditoria |
+
+---
+
+## ⚠️ Observações Técnicas
+
+* Frontend consome API via `fetch`
+* Backend em Node.js (Express)
+* Dados armazenados localmente (sem persistência robusta)
+* Porta padrão: `3000`
+
+---
+
+## ⚠️ Segurança e Dependências
+
+Atualmente o projeto possui:
+
+* Dependências desatualizadas (deprecated)
+* Vulnerabilidades identificadas via `npm audit`
+
+Para correção:
+
+```bash
+npm audit fix
+```
+
+ou (com cuidado):
+
+```bash
+npm audit fix --force
+```
+
+---
+
+## 🧪 Status do Projeto
+
+✅ MVP funcional rodando
+⚠️ Ainda não preparado para produção
+⏳ Melhorias de segurança e persistência necessárias
+
+---
+
+## 🔮 Próximos Passos
+
+* Banco de dados (PostgreSQL / MongoDB)
+* Variável de ambiente para porta (`process.env.PORT`)
+* Autenticação de usuários
+* Logs estruturados
+* Hardening de segurança
+
+---
+
+## 💡 Evolução Possível
+
+Este projeto pode evoluir para:
+
+* Plataforma de auditoria clínica
+* Sistema de compliance médico
+* Base para governança (integração com TCRIA)
+
+---
+
+## 📄 Licença
+
+MIT License
 
 **Clinical Trace System (MVP)**
 
