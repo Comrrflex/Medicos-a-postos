@@ -1,5 +1,15 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {}
-}"ghcr.io/joshuanianji/devcontainer-features/azure-cli-persistence-forked:0": {}
-
+  "name": "Medicos a Postos Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "features": {
+    "ghcr.io/devcontainers/features/azure-cli:1": {}
+  },
+  "postCreateCommand": "npm install",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Clinical Trace System",
+      "onAutoForward": "openPreview"
+    }
+  }
+}
