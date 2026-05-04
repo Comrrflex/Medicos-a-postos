@@ -1,14 +1,36 @@
-# Medicos-a-postos
-# Clinical Trace System (MVP)
+# 🩺 Medicos a Postos
 
-MVP web para rastreabilidade clínica com:
+**Clinical Trace System (MVP)**
 
-- cadastro de caso clínico
-- histórico de decisões
-- API REST básica
-- trilha inicial de auditoria
+Sistema web para **rastreabilidade de decisões clínicas**, com foco em auditoria, transparência e governança.
 
-## Estrutura
+---
+
+## 🚀 Visão Geral
+
+O **Medicos a Postos** é um MVP de um sistema de rastreabilidade clínica que permite:
+
+* Registrar casos clínicos
+* Acompanhar decisões médicas ao longo do tempo
+* Criar trilhas de auditoria
+* Expor dados via API REST
+
+> 🔍 Ideal para evolução futura em sistemas de compliance médico, auditoria hospitalar e governança em saúde.
+
+---
+
+## 🧩 Funcionalidades
+
+* 📌 Cadastro de casos clínicos
+* 🧠 Registro de histórico de decisões
+* 🔎 Consulta de casos por ID
+* 📊 Listagem de casos (ordem recente)
+* 🛡️ Trilha básica de auditoria
+* 🌐 API REST simples
+
+---
+
+## 🏗️ Arquitetura
 
 ```
 clinical-trace-system/
@@ -22,33 +44,97 @@ clinical-trace-system/
     package.json
 ```
 
-## Como rodar
+### Tecnologias utilizadas
 
-1. Acesse a pasta do backend:
+* Backend: Node.js + Express
+* Frontend: HTML + CSS + JavaScript
+* Banco: Estrutura simples (in-memory / local)
+
+---
+
+## ⚙️ Como rodar localmente
+
+### 1. Acesse o backend
 
 ```bash
 cd backend
 ```
 
-2. Instale dependências:
+### 2. Instale as dependências
 
 ```bash
 npm install
 ```
 
-3. Suba o servidor:
+### 3. Inicie o servidor
 
 ```bash
 npm start
 ```
 
-4. Abra no navegador:
+### 4. Acesse no navegador
 
-`http://localhost:3000`
+```
+http://localhost:3000
+```
 
-## Endpoints disponíveis
+---
 
-- `POST /api/casos` cria caso clínico
-- `GET /api/casos` lista casos (mais recentes primeiro)
-- `GET /api/casos/:id` consulta caso por ID
-- `GET /api/auditoria` lista trilha de auditoria
+## 🔌 Endpoints da API
+
+### ➕ Criar caso clínico
+
+```
+POST /api/casos
+```
+
+### 📄 Listar casos
+
+```
+GET /api/casos
+```
+
+### 🔍 Consultar caso por ID
+
+```
+GET /api/casos/:id
+```
+
+### 🛡️ Auditoria
+
+```
+GET /api/auditoria
+```
+
+---
+
+## 🧪 Status do Projeto
+
+🚧 MVP em desenvolvimento
+Foco atual: validação de conceito e estrutura de rastreabilidade
+
+---
+
+## 🔮 Próximos Passos
+
+* Persistência em banco de dados (PostgreSQL / MongoDB)
+* Autenticação de usuários
+* Logs avançados de auditoria
+* Versionamento de decisões clínicas
+* Integração com sistemas hospitalares
+
+---
+
+## 💡 Possível Evolução (SaaS)
+
+Este projeto pode evoluir para:
+
+* Plataforma de auditoria clínica
+* Sistema de compliance médico
+* Ferramenta de suporte à decisão com rastreabilidade
+
+---
+
+## 📄 Licença
+
+MIT License
