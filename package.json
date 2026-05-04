@@ -4,16 +4,21 @@
   "description": "MVP de rastreabilidade clínica com Express e SQLite",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "keywords": [
     "clinical",
     "traceability",
-    "mvp",
-    "healthcare"
+    "audit",
+    "healthcare",
+    "compliance"
   ],
-  "author": "",
+  "author": "Rodrigo Baptista da Silva",
   "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
@@ -21,5 +26,3 @@
     "sqlite3": "^5.1.7"
   }
 }
-~                                                                                                                       
-~                                                                                                                       
