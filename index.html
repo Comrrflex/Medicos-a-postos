@@ -143,7 +143,94 @@ Plataforma para registro estruturado, rastreabilidade e auditoria de decisões c
 
 <a class="button" href="https://wa.me/5521997875539?text=Olá,%20quero%20acesso%20ao%20MVP%20Médicos%20a%20Postos" target="_blank">
 Solicitar acesso
+1) **Erro de HTML quebrando o botão**
+```html
+Solicitar acesso
 </a>
+```
+👉 Esse `<` solto está errado. Corrige para:
+```html
+Solicitar acesso
+</a>
+```
+
+2) **Tag `<a>` aberta dentro de “Contato” sem fechamento correto**
+Você abriu um `<a>` mas não colocou conteúdo nem fechou direito.
+
+Troca isso:
+```html
+<p>Interessado em usar ou integrar?</p>
+</a>
+```
+
+Por algo funcional:
+```html
+<p>Interessado em usar ou integrar?</p>
+<a class="button" href="https://wa.me/5521997875539" target="_blank">
+Falar no WhatsApp
+</a>
+```
+
+3) **Melhoria comercial (importante pra vender agora)**
+Seu texto está muito técnico. Ajusta para conversão:
+
+Troca:
+```html
+Plataforma para registro estruturado, rastreabilidade e auditoria de decisões clínicas.
+```
+
+Por:
+```html
+Sistema para organizar decisões clínicas com rastreabilidade completa e segurança jurídica.
+```
+
+4) **Call-to-action mais forte**
+Troca:
+```html
+Solicitar acesso
+```
+
+Por:
+```html
+Quero acesso ao MVP
+```
+
+5) **Adicionar urgência (vende mais)**
+Logo abaixo do botão:
+```html
+<p style="margin-top:10px; color:#94a3b8;">
+Acesso limitado para testes iniciais
+</p>
+```
+
+6) **Status mais convincente**
+Troca:
+```html
+<p>MVP funcional disponível</p>
+<p>Deploy ativo</p>
+<p>Pronto para evolução e integração</p>
+```
+
+Por:
+```html
+<p>✔ MVP funcionando em produção</p>
+<p>✔ Estrutura pronta para integração via API</p>
+<p>✔ Disponível para pilotos com instituições</p>
+```
+
+7) **Pequeno ajuste visual (melhora percepção profissional)**
+No CSS `.button`, muda:
+```css
+color: #000;
+```
+para:
+```css
+color: #0f172a;
+```
+
+---
+
+Se você aplicar só esses 7 pontos, já sai de “página técnica” pra **página vendável agora**./a>
 
 <h2>🚀 O que resolve</h2>
 <div class="card">
