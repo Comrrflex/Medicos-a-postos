@@ -1,106 +1,217 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Médicos a Postos</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      background: #f5f5f5;
-      color: #222;
+      background: #f3f8fb;
+      color: #1f2933;
+      line-height: 1.6;
     }
+
+    .hero {
+      background: linear-gradient(135deg, #007bff, #00b894);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      max-width: 850px;
+      margin: 0 auto 20px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ffffff;
+      color: #007bff;
+      padding: 16px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background: #eaf4ff;
+      transform: translateY(-2px);
+    }
+
     .container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: auto;
-      padding: 40px 20px;
+      padding: 50px 20px;
     }
-    h1 {
-      font-size: 32px;
-    }
+
     .card {
       background: white;
+      padding: 28px;
+      margin: 24px 0;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #007bff;
+      font-size: 28px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .benefit {
+      background: #f8fbff;
       padding: 20px;
-      margin: 20px 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      border-left: 5px solid #00b894;
+      font-weight: bold;
     }
-    button {
-      background: #007BFF;
+
+    .steps p {
+      background: #f1f7ff;
+      padding: 16px;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+
+    .price {
+      text-align: center;
+      background: linear-gradient(135deg, #ffffff, #eef8ff);
+      border: 2px solid #007bff;
+    }
+
+    .price h2 {
+      font-size: 32px;
+    }
+
+    .price strong {
+      font-size: 34px;
+      color: #00b894;
+    }
+
+    .whatsapp {
+      background: #25d366;
       color: white;
-      border: none;
-      padding: 15px 25px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
+      margin-top: 20px;
     }
-    button:hover {
-      background: #0056b3;
+
+    .whatsapp:hover {
+      background: #1ebe5d;
+    }
+
+    .warning {
+      font-size: 15px;
+      color: #52606d;
+      margin-top: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #6b7280;
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
 
-<div class="container">
-
-  <!-- HEADLINE -->
-  <h1>Se você não registra suas decisões clínicas, você está exposto</h1>
-
-  <p>Tenha um histórico organizado e rastreável de cada paciente e evite problemas com erros, esquecimentos ou questionamentos.</p>
-
-  <button>Começar agora por R$46/mês</button>
-
-  <!-- PROBLEMA -->
-  <div class="card">
-    <h2>O problema</h2>
-    <p>Muitos médicos ainda registram decisões de forma desorganizada ou nem registram.</p>
-    <p>Isso gera risco real em casos de erro, dúvida ou questionamento jurídico.</p>
-  </div>
-
-  <!-- SOLUÇÃO -->
-  <div class="card">
-    <h2>A solução</h2>
-    <p>Um sistema simples para registrar decisões clínicas com histórico completo e rastreável.</p>
-  </div>
-
-  <!-- BENEFÍCIOS -->
-  <div class="card">
-    <h2>O que muda na sua rotina</h2>
-
-    <p>✔ Nunca mais perca histórico de decisões clínicas</p>
-    <p>✔ Tenha tudo documentado para evitar problemas jurídicos</p>
-    <p>✔ Acompanhe cada paciente com clareza e segurança</p>
-    <p>✔ Implemente em poucos minutos, sem complicação</p>
-  </div>
-
-  <!-- COMO FUNCIONA -->
-  <div class="card">
-    <h2>Como funciona</h2>
-
-    <p>1. Registre a decisão clínica</p>
-    <p>2. O sistema salva automaticamente</p>
-    <p>3. Consulte quando precisar</p>
-  </div>
-
-  <!-- PÚBLICO -->
-  <div class="card">
-    <h2>Para quem é</h2>
-
-    <p>Médicos autônomos</p>
-    <p>Clínicas pequenas</p>
-  </div>
-
-  <!-- CTA FINAL -->
-  <div class="card" style="text-align:center;">
-    <h2>Comece agora</h2>
-    <p>Acesso imediato por apenas R$46/mês</p>
+  <section class="hero">
+    <h1>Proteja suas decisões clínicas com registros organizados e rastreáveis</h1>
+    <p>
+      Evite esquecimentos, perda de histórico e insegurança em questionamentos.
+      Tenha tudo documentado de forma simples, rápida e acessível.
+    </p>
     <a href="https://wa.me/5521997875539?text=Tenho%20interesse%20no%20M%C3%A9dicos%20a%20Postos" class="button">
-  Testar agora
-</a>
-  </div>
+      Começar agora por R$46/mês
+    </a>
+  </section>
 
-</div>
+  <main class="container">
+
+    <div class="card">
+      <h2>O problema</h2>
+      <p>
+        Na rotina médica, muitas decisões clínicas são tomadas sob pressão,
+        mas nem sempre ficam registradas de maneira clara e segura.
+      </p>
+      <p>
+        Isso pode gerar riscos em casos de dúvidas, falhas de comunicação,
+        esquecimentos ou questionamentos jurídicos.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>A solução</h2>
+      <p>
+        O <strong>Médicos a Postos</strong> ajuda você a registrar decisões clínicas
+        de forma organizada, com histórico acessível e rastreável sempre que precisar.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>O que muda na sua rotina</h2>
+
+      <div class="grid">
+        <div class="benefit">✔ Histórico clínico mais organizado</div>
+        <div class="benefit">✔ Mais segurança profissional</div>
+        <div class="benefit">✔ Registros rápidos e simples</div>
+        <div class="benefit">✔ Menos risco de perda de informação</div>
+      </div>
+    </div>
+
+    <div class="card steps">
+      <h2>Como funciona</h2>
+      <p><strong>1.</strong> Registre a decisão clínica do paciente</p>
+      <p><strong>2.</strong> O sistema organiza e salva o histórico</p>
+      <p><strong>3.</strong> Consulte sempre que precisar</p>
+    </div>
+
+    <div class="card">
+      <h2>Para quem é</h2>
+      <p>Ideal para médicos autônomos, consultórios particulares e clínicas pequenas que desejam mais controle e segurança nos registros clínicos.</p>
+    </div>
+
+    <div class="card price">
+      <h2>Comece hoje</h2>
+      <p>Acesso imediato por apenas</p>
+      <strong>R$46/mês</strong>
+      <br />
+      <a href="https://wa.me/5521997875539?text=Tenho%20interesse%20no%20M%C3%A9dicos%20a%20Postos" class="button whatsapp">
+        Testar agora pelo WhatsApp
+      </a>
+      <p class="warning">
+        Simples, direto e sem complicação para implementar.
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 Médicos a Postos — Registros clínicos organizados para mais segurança profissional.
+  </footer>
 
 </body>
 </html>
