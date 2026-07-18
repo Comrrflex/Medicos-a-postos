@@ -1,0 +1,26 @@
+{
+  "name": "medicos-a-postos",
+  "version": "1.0.0",
+  "description": "Consulta e registro de decisões clínicas desidentificadas com confirmação e auditoria.",
+  "author": {
+    "name": "Rodrigo Baptista da Silva"
+  },
+  "license": "MIT",
+  "keywords": ["clinical-traceability", "deidentified", "audit", "mcp", "chatgpt-app"],
+  "interface": {
+    "displayName": "Medicos A Postos",
+    "shortDescription": "Rastreabilidade clínica com dados desidentificados.",
+    "longDescription": "Localize e registre decisões clínicas desidentificadas por código de caso, com revisão explícita antes da gravação e trilha de auditoria.",
+    "developerName": "Rodrigo Baptista da Silva",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write", "OAuth"],
+    "defaultPrompt": [
+      "Mostre os registros desidentificados mais recentes.",
+      "Busque o código de caso CASO-001.",
+      "Prepare um novo registro desidentificado para revisão."
+    ],
+    "brandColor": "#087F67"
+  },
+  "mcpServers": "./.mcp.json",
+  "apps": "./.app.json"
+}

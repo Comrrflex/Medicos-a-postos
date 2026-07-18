@@ -1,0 +1,146 @@
+openapi: 3.1.0
+info:
+  title: Médicos a Postos API
+  version: 1.1.0
+  description: API autenticada para rastreabilidade de decisões clínicas.
+servers:
+  - url: http://localhost:3000
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: opaque
+  schemas:
+    Error:
+      type: object
+      properties:
+        erro: { type: string }
+      required: [erro]
+    CaseInput:
+      type: object
+      required: [paciente, medico, decisao]
+      properties:
+        paciente: { type: string, maxLength: 120 }
+        medico: { type: string, maxLength: 120 }
+        evidencias: { type: string, maxLength: 4000 }
+        raciocinio: { type: string, maxLength: 4000 }
+        decisao: { type: string, maxLength: 4000 }
+    Case:
+      allOf:
+        - $ref: '#/components/schemas/CaseInput'
+        - type: object
+          properties:
+            id: { type: integer }
+            data: { type: string, format: date-time }
+paths:
+  /health:
+    get:
+      summary: Verificar disponibilidade
+      responses:
+        '200': { description: Serviço disponível }
+  /api/configuracao:
+    get:
+      summary: Consultar se a instalação já foi configurada
+      responses:
+        '200': { description: Estado da configuração }
+  /api/configuracao/inicial:
+    post:
+      summary: Criar a primeira clínica e o administrador
+      description: Disponível somente enquanto não existir nenhum usuário.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [clinica, nome, email, senha]
+              properties:
+                clinica: { type: string }
+                nome: { type: string }
+                email: { type: string, format: email }
+                senha: { type: string, minLength: 10 }
+      responses:
+        '201': { description: Ambiente e sessão criados }
+        '409': { description: Ambiente já configurado }
+  /api/auth/login:
+    post:
+      summary: Iniciar sessão
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, senha]
+              properties:
+                email: { type: string, format: email }
+                senha: { type: string }
+      responses:
+        '200': { description: Token e usuário autenticado }
+        '401': { description: Credenciais inválidas }
+  /api/auth/me:
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: Consultar a sessão atual
+      responses:
+        '200': { description: Usuário autenticado }
+        '401': { description: Sessão inválida }
+  /api/auth/logout:
+    post:
+      security: [{ bearerAuth: [] }]
+      summary: Revogar a sessão atual
+      responses:
+        '204': { description: Sessão encerrada }
+  /api/casos:
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: Listar casos da clínica autenticada
+      responses:
+        '200':
+          description: Lista de casos
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Case' } }
+    post:
+      security: [{ bearerAuth: [] }]
+      summary: Registrar caso na clínica autenticada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CaseInput' }
+      responses:
+        '201': { description: Caso criado }
+        '400': { description: Dados inválidos }
+  /api/casos/{id}:
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: Consultar caso da clínica autenticada
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200': { description: Caso encontrado }
+        '404': { description: Caso inexistente ou de outra clínica }
+  /api/usuarios:
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: Listar usuários da clínica (admin)
+      responses:
+        '200': { description: Lista de usuários }
+        '403': { description: Perfil sem permissão }
+    post:
+      security: [{ bearerAuth: [] }]
+      summary: Criar usuário na clínica (admin)
+      responses:
+        '201': { description: Usuário criado }
+        '403': { description: Perfil sem permissão }
+  /api/auditoria:
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: Listar eventos de auditoria da clínica
+      responses:
+        '200': { description: Eventos mais recentes }
