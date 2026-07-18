@@ -1,5 +1,5 @@
 # 🩺 Medicos a Postos  
-**Clinical Trace System (MVP funcional)**
+**Sistema de rastreabilidade clínica com autenticação e API REST**
 
 Sistema web para **registro e rastreabilidade de decisões clínicas**, com frontend dinâmico e API REST integrada.
 
@@ -14,7 +14,7 @@ O **Medicos a Postos** é um MVP funcional que implementa um fluxo completo:
 - Visualização dinâmica de histórico  
 - Estrutura inicial de auditoria  
 
-> 🔍 O sistema já roda localmente com backend ativo e integração completa frontend → API.
+> 🔍 O sistema roda localmente com backend ativo, autenticação, isolamento por clínica e integração frontend → API.
 
 ---
 
@@ -27,6 +27,9 @@ O **Medicos a Postos** é um MVP funcional que implementa um fluxo completo:
 - ⚠️ Tratamento de erros no frontend  
 - 🛡️ Trilha inicial de auditoria  
 - 🌐 API REST  
+- 🔐 Sessões autenticadas e perfis de acesso
+- 🏥 Isolamento de dados por clínica
+- 🧾 Auditoria persistente
 
 ---
 
@@ -68,16 +71,25 @@ npm start
 http://localhost:3000
 ```
 
+A área autenticada está em `http://localhost:3000/app.html`. Na primeira abertura,
+o sistema solicita a criação da clínica e do administrador inicial.
+
 ---
 
 ## 🔌 Endpoints da API
 
 | Método | Endpoint            | Descrição              |
 |--------|--------------------|-----------------------|
+| POST   | /api/auth/login    | Iniciar sessão        |
+| POST   | /api/auth/logout   | Revogar sessão        |
+| GET    | /api/auth/me       | Consultar sessão      |
 | POST   | /api/casos         | Criar caso clínico    |
-| GET    | /api/casos         | Listar casos          |
+| GET    | /api/casos         | Listar casos da clínica |
 | GET    | /api/casos/:id     | Consultar por ID      |
-| GET    | /api/auditoria     | Trilhas de auditoria  |
+| GET/POST | /api/usuarios    | Gerenciar equipe (admin) |
+| GET    | /api/auditoria     | Trilha persistente da clínica |
+
+As rotas protegidas usam `Authorization: Bearer <token>`. O contrato completo está em `openapi.yaml`.
 
 ---
 
@@ -98,8 +110,9 @@ http://localhost:3000
 process.env.PORT || 3000
 ```
 
-- Dados armazenados localmente (não persistente em produção)  
-- CORS liberado (ajustar para produção)  
+- Dados armazenados em SQLite local; use `DATABASE_PATH` para configurar o arquivo
+- CORS fechado por padrão; use `CORS_ORIGIN` somente quando frontend e API estiverem em origens diferentes
+- Não use dados reais de pacientes antes da avaliação de produção descrita em `SECURITY.md`
 
 ---
 
@@ -118,8 +131,8 @@ npm audit fix
 
 ## 🧪 Status do Projeto
 
-✅ MVP funcional rodando  
-⚠️ Ainda não preparado para produção  
+✅ MVP autenticado e testado
+⚠️ Ainda requer controles operacionais, jurídicos e de infraestrutura para produção
 ⏳ Melhorias de segurança e persistência necessárias  
 
 ---
@@ -131,6 +144,23 @@ npm audit fix
 - Logs estruturados de auditoria  
 - Versionamento de decisões clínicas  
 - Deploy em nuvem (Azure / SaaS)  
+
+## ChatGPT Apps SDK / MCP
+
+O app público fica em `mcp-app/` e usa Skybridge. Ele expõe `/mcp`, autenticação OAuth 2.1 e três ferramentas para conteúdo exclusivamente desidentificado:
+
+- `search_cases`
+- `prepare_case`
+- `create_case`
+
+```bash
+cd mcp-app
+cp .env.example .env
+npm install
+npm run dev
+```
+
+Use `npm run build` para validar o bundle de produção. A preparação para o diretório público está documentada em `SUBMISSION.md`.
 
 ---
 

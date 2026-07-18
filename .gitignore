@@ -1,0 +1,5 @@
+node_modules/
+clinical.db
+clinical.db-*
+.env
+.DS_Store

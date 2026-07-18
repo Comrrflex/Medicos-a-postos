@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Área de registros | Médicos a Postos</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">Médicos a Postos</span>
+        <h1>Registros clínicos</h1>
+      </div>
+      <div class="session-actions">
+        <span id="usuario-atual" class="meta"></span>
+        <button id="sair" class="secondary" type="button" hidden>Sair</button>
+        <a class="back-link" href="/">Voltar ao site</a>
+      </div>
+    </header>
+
+    <main id="acesso" class="access-shell">
+      <section id="login-card" class="card auth-card">
+        <h2>Entrar</h2>
+        <p class="subtitle">Use seu acesso para consultar os registros da sua clínica.</p>
+        <form id="login-form">
+          <label for="login-email">E-mail</label>
+          <input id="login-email" name="email" type="email" required autocomplete="username" />
+          <label for="login-senha">Senha</label>
+          <input id="login-senha" name="senha" type="password" required autocomplete="current-password" />
+          <button type="submit">Entrar</button>
+          <p id="login-feedback" class="feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="setup-card" class="card auth-card" hidden>
+        <h2>Configuração inicial</h2>
+        <p class="subtitle">Crie a clínica e o primeiro administrador. Esta etapa só aparece uma vez.</p>
+        <form id="setup-form">
+          <label for="setup-clinica">Nome da clínica</label>
+          <input id="setup-clinica" name="clinica" maxlength="120" required />
+          <label for="setup-nome">Seu nome</label>
+          <input id="setup-nome" name="nome" maxlength="120" required autocomplete="name" />
+          <label for="setup-email">E-mail</label>
+          <input id="setup-email" name="email" type="email" required autocomplete="username" />
+          <label for="setup-senha">Senha</label>
+          <input id="setup-senha" name="senha" type="password" minlength="10" required autocomplete="new-password" />
+          <span class="meta">Use ao menos 10 caracteres.</span>
+          <button type="submit">Criar acesso seguro</button>
+          <p id="setup-feedback" class="feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <main id="aplicacao" class="layout" hidden>
+      <section class="card" aria-labelledby="novo-registro">
+        <h2 id="novo-registro">Novo registro</h2>
+        <p class="subtitle">Documente os elementos que sustentaram a decisão clínica.</p>
+
+        <form id="caso-form">
+          <label for="paciente">Paciente <span aria-hidden="true">*</span></label>
+          <input id="paciente" name="paciente" maxlength="120" required autocomplete="off" />
+
+          <label for="medico">Profissional responsável <span aria-hidden="true">*</span></label>
+          <input id="medico" name="medico" maxlength="120" required autocomplete="name" />
+
+          <label for="evidencias">Evidências e contexto</label>
+          <textarea id="evidencias" name="evidencias" rows="4" maxlength="4000"></textarea>
+
+          <label for="raciocinio">Raciocínio clínico</label>
+          <textarea id="raciocinio" name="raciocinio" rows="4" maxlength="4000"></textarea>
+
+          <label for="decisao">Decisão ou conduta <span aria-hidden="true">*</span></label>
+          <textarea id="decisao" name="decisao" rows="4" maxlength="4000" required></textarea>
+
+          <button id="salvar" type="submit">Salvar registro</button>
+          <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="history" aria-labelledby="titulo-historico">
+        <div class="history-header">
+          <div>
+            <h2 id="titulo-historico">Histórico</h2>
+            <p class="subtitle">Registros mais recentes primeiro.</p>
+          </div>
+          <button id="atualizar" class="secondary" type="button">Atualizar</button>
+        </div>
+        <div id="historico" class="history-list" aria-live="polite">
+          <p class="meta">Carregando registros…</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

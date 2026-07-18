@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test": "node --test"
   },
   "keywords": [
     "clinical",
@@ -23,6 +24,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "helmet": "^8.1.0",
-    "sqlite3": "^5.1.7"
+    "jose": "^6.2.3",
+    "sqlite3": "^6.0.1"
   }
 }
