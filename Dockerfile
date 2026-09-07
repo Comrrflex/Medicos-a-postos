@@ -16,6 +16,8 @@ ENV NODE_ENV=production
 ENV PORT=3000
 ENV DATABASE_PATH=/data/clinical.db
 
+RUN mkdir -p /data
+
 EXPOSE 3000
 
 # Healthcheck implicito via /health (Railway/Render/Fly)

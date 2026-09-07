@@ -1,14 +1,15 @@
 # Medicos a Postos — Render Blueprint
 # Plan: starter (smallest paid plan that supports persistent disks).
 # Free cannot attach disks; SQLite needs /data persistence for commercial use.
+# runtime: docker (Node native falha sqlite3/GLIBC no Runtime Render).
 services:
   - type: web
     name: medicos-a-postos
-    runtime: node
+    runtime: docker
     plan: starter
     region: oregon
-    buildCommand: npm ci
-    startCommand: npm start
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
