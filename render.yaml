@@ -1,0 +1,23 @@
+# Medicos a Postos — Render Blueprint
+# Plan: starter (smallest paid plan that supports persistent disks).
+# Free cannot attach disks; SQLite needs /data persistence for commercial use.
+services:
+  - type: web
+    name: medicos-a-postos
+    runtime: node
+    plan: starter
+    region: oregon
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      - key: DATABASE_PATH
+        value: /data/clinical.db
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
