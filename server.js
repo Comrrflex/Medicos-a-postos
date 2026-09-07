@@ -213,25 +213,50 @@ app.post("/api/configuracao/inicial", async (req, res, next) => {
     const count = await database.get("SELECT COUNT(*) AS total FROM usuarios");
     if (count.total > 0) return res.status(409).json({ erro: "A configuração inicial já foi concluída." });
     const clinica = text(req.body.clinica);
+    const telefone = text(req.body.telefone);
+    const cidade = text(req.body.cidade);
+    const uf = text(req.body.uf).toUpperCase();
+    const especialidade = text(req.body.especialidade);
+    const cnpj = text(req.body.cnpj) || null;
+    const site = text(req.body.site) || null;
     const nome = text(req.body.nome);
+    const crm = text(req.body.crm) || null;
     const email = text(req.body.email).toLowerCase();
     const senha = String(req.body.senha || "");
-    if (!clinica || !nome || !/^\S+@\S+\.\S+$/.test(email) || senha.length < 10) {
-      return res.status(400).json({ erro: "Informe clínica, nome, e-mail válido e senha com ao menos 10 caracteres." });
+    if (!clinica || !telefone || !cidade || !/^[A-Z]{2}$/.test(uf) || !especialidade || !nome || !/^\S+@\S+\.\S+$/.test(email) || senha.length < 10) {
+      return res.status(400).json({ erro: "Informe clínica, telefone, cidade, UF (2 letras), especialidade, nome, e-mail válido e senha com ao menos 10 caracteres." });
+    }
+    if (telefone.length > 30 || cidade.length > 80 || especialidade.length > 80 || (cnpj && cnpj.length > 18) || (site && site.length > 160) || (crm && crm.length > 30) || clinica.length > 120 || nome.length > 120) {
+      return res.status(400).json({ erro: "Um ou mais campos excedem o tamanho permitido." });
     }
     const now = new Date().toISOString();
     await database.run("BEGIN IMMEDIATE");
     try {
-      const createdClinic = await database.run("INSERT INTO clinicas (nome, criado_em) VALUES (?, ?)", [clinica, now]);
+      const createdClinic = await database.run(
+        `INSERT INTO clinicas (nome, telefone, cidade, uf, especialidade, cnpj, site, criado_em)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [clinica, telefone, cidade, uf, especialidade, cnpj, site, now]
+      );
       const createdUser = await database.run(
-        "INSERT INTO usuarios (clinica_id, nome, email, senha_hash, papel, criado_em) VALUES (?, ?, ?, ?, 'admin', ?)",
-        [createdClinic.lastID, nome, email, hashPassword(senha), now]
+        "INSERT INTO usuarios (clinica_id, nome, email, senha_hash, papel, crm, criado_em) VALUES (?, ?, ?, ?, 'admin', ?, ?)",
+        [createdClinic.lastID, nome, email, hashPassword(senha), crm, now]
       );
       await database.run("COMMIT");
       const user = { id: createdUser.lastID, clinica_id: createdClinic.lastID };
-      await audit(user, "CONFIGURACAO_INICIAL", "clinica", createdClinic.lastID);
+      await audit(user, "CONFIGURACAO_INICIAL", "clinica", createdClinic.lastID, { cidade, uf, especialidade });
       const session = await createSession(createdUser.lastID);
-      res.status(201).json({ token: session.token, expiraEm: session.expiraEm, usuario: { id: createdUser.lastID, nome, email, papel: "admin", clinica: { id: createdClinic.lastID, nome: clinica } } });
+      res.status(201).json({
+        token: session.token,
+        expiraEm: session.expiraEm,
+        usuario: {
+          id: createdUser.lastID,
+          nome,
+          email,
+          papel: "admin",
+          crm,
+          clinica: { id: createdClinic.lastID, nome: clinica, telefone, cidade, uf, especialidade, cnpj, site },
+        },
+      });
     } catch (error) {
       await database.run("ROLLBACK");
       throw error;

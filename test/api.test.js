@@ -32,17 +32,53 @@ test.after(async () => {
   fs.rmSync(testDirectory, { recursive: true, force: true });
 });
 
-test("protege casos, configura clínica e mantém isolamento", async () => {
+test("protege casos, configura clínica com campos de cadastro e mantém isolamento", async () => {
   const anonymous = await request("/api/casos");
   assert.equal(anonymous.response.status, 401);
 
-  const setup = await request("/api/configuracao/inicial", {
+  const incomplete = await request("/api/configuracao/inicial", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ clinica: "Clínica Teste", nome: "Admin Teste", email: "admin@teste.local", senha: "senha-segura-123" }),
   });
+  assert.equal(incomplete.response.status, 400);
+
+  const setup = await request("/api/configuracao/inicial", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      clinica: "Clínica Teste",
+      telefone: "(21) 99999-0000",
+      cidade: "Rio de Janeiro",
+      uf: "rj",
+      especialidade: "Clínica geral",
+      cnpj: "12.345.678/0001-90",
+      site: "@clinicateste",
+      nome: "Admin Teste",
+      crm: "CRM/RJ 123456",
+      email: "admin@teste.local",
+      senha: "senha-segura-123",
+    }),
+  });
   assert.equal(setup.response.status, 201);
   assert.ok(setup.body.token);
+  assert.equal(setup.body.usuario.clinica.uf, "RJ");
+  assert.equal(setup.body.usuario.clinica.cidade, "Rio de Janeiro");
+  assert.equal(setup.body.usuario.clinica.especialidade, "Clínica geral");
+  assert.equal(setup.body.usuario.clinica.telefone, "(21) 99999-0000");
+  assert.equal(setup.body.usuario.clinica.cnpj, "12.345.678/0001-90");
+  assert.equal(setup.body.usuario.clinica.site, "@clinicateste");
+  assert.equal(setup.body.usuario.crm, "CRM/RJ 123456");
+
+  const clinic = await database.get("SELECT telefone, cidade, uf, especialidade, cnpj, site FROM clinicas WHERE id = ?", [setup.body.usuario.clinica.id]);
+  assert.equal(clinic.uf, "RJ");
+  assert.equal(clinic.cidade, "Rio de Janeiro");
+  assert.equal(clinic.especialidade, "Clínica geral");
+  assert.equal(clinic.cnpj, "12.345.678/0001-90");
+
+  const admin = await database.get("SELECT crm FROM usuarios WHERE email = ?", ["admin@teste.local"]);
+  assert.equal(admin.crm, "CRM/RJ 123456");
+
   const auth = { Authorization: `Bearer ${setup.body.token}`, "Content-Type": "application/json" };
 
   const created = await request("/api/casos", {

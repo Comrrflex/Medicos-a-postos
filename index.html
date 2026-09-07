@@ -11,27 +11,47 @@
     content="Sistema simples para médicos autônomos e clínicas pequenas registrarem decisões clínicas com histórico organizado, rastreabilidade e apoio documental."
   />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@450;550;650;750;800&display=swap" rel="stylesheet" />
+
   <style>
+    :root {
+      --accent: #087f67;
+      --accent-dark: #05604e;
+      --accent-soft: rgba(8, 127, 103, 0.12);
+      --text: #14302a;
+      --muted: #5c726c;
+      --border: #d5e3df;
+      --panel: #ffffff;
+      --bg: #f0f6f4;
+      --shadow: 0 4px 6px -1px rgba(20, 48, 42, 0.04), 0 16px 40px -8px rgba(20, 48, 42, 0.1);
+    }
+
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f7fb;
-      color: #1f2937;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(1100px 480px at 8% -12%, rgba(8, 127, 103, 0.1), transparent 55%),
+        linear-gradient(160deg, #edf8f5 0%, var(--bg) 45%, #eef4f2 100%);
+      color: var(--text);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
       max-width: 960px;
       margin: 0 auto;
-      padding: 32px 20px;
+      padding: 36px 20px;
     }
 
     .hero, .card {
-      background: #ffffff;
+      background: var(--panel);
+      border: 1px solid var(--border);
       border-radius: 18px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      box-shadow: var(--shadow);
     }
 
     .hero {
@@ -46,38 +66,42 @@
 
     .badge {
       display: inline-block;
-      background: #e8f1ff;
-      color: #0056b3;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
       padding: 8px 14px;
       border-radius: 999px;
-      font-weight: 700;
-      font-size: 14px;
+      font-weight: 750;
+      font-size: 13px;
+      letter-spacing: 0.02em;
       margin-bottom: 18px;
     }
 
     h1 {
-      font-size: 40px;
-      line-height: 1.12;
+      font-size: clamp(1.85rem, 4vw, 2.5rem);
+      line-height: 1.15;
       margin: 0 0 18px;
-      color: #111827;
+      color: var(--text);
       letter-spacing: -0.03em;
+      font-weight: 800;
     }
 
     h2 {
       margin: 0 0 14px;
-      color: #111827;
-      font-size: 26px;
+      color: var(--text);
+      font-size: 1.45rem;
       letter-spacing: -0.02em;
+      font-weight: 750;
     }
 
     p {
-      font-size: 18px;
+      font-size: 1.05rem;
       margin: 10px 0;
+      color: var(--muted);
     }
 
     .subtitle {
-      font-size: 21px;
-      color: #374151;
+      font-size: 1.2rem;
+      color: #3d564f;
       margin-bottom: 24px;
       max-width: 760px;
     }
@@ -92,55 +116,69 @@
 
     .button {
       display: inline-block;
-      background: #007bff;
+      background: var(--accent);
       color: #ffffff;
       text-decoration: none;
-      padding: 16px 26px;
+      padding: 14px 22px;
       border-radius: 10px;
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 750;
       text-align: center;
+      box-shadow: 0 1px 2px rgba(5, 96, 78, 0.25);
+      transition: background 0.15s ease, transform 0.1s ease;
     }
 
-    .button:hover { background: #0056b3; }
+    .button:hover { background: var(--accent-dark); }
+    .button:focus-visible { outline: 3px solid rgba(8, 127, 103, 0.28); outline-offset: 2px; }
 
     .button.secondary {
-      background: #111827;
+      background: #14302a;
+      box-shadow: none;
     }
 
-    .button.secondary:hover { background: #000000; }
+    .button.secondary:hover { background: #0c1f1b; }
+
+    .button.ghost {
+      background: #e6f2ef;
+      color: var(--accent-dark);
+      box-shadow: none;
+    }
+
+    .button.ghost:hover { background: #d5ebe5; }
 
     .note {
-      color: #6b7280;
-      font-size: 15px;
+      color: var(--muted);
+      font-size: 0.92rem;
       margin-top: 12px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 16px;
       margin-top: 18px;
     }
 
     .mini-card {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
+      background: #f7fbfa;
+      border: 1px solid var(--border);
       padding: 18px;
-      border-radius: 12px;
-      font-size: 16px;
+      border-radius: 14px;
+      font-size: 0.98rem;
+      color: var(--muted);
+      box-shadow: 0 1px 2px rgba(20, 48, 42, 0.04);
     }
 
     .mini-card strong {
       display: block;
       margin-bottom: 6px;
-      color: #111827;
-      font-size: 17px;
+      color: var(--text);
+      font-size: 1.02rem;
     }
 
     .demo-box {
-      background: #0f172a;
-      color: #e5e7eb;
+      background: #0f2a24;
+      color: #e5eeeb;
       padding: 24px;
       border-radius: 14px;
       margin-top: 18px;
@@ -148,39 +186,56 @@
 
     .demo-line {
       padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.98rem;
     }
 
     .demo-line:last-child { border-bottom: none; }
+    .demo-line strong { color: #9fd6c7; }
 
     .price-card {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
+      background: linear-gradient(180deg, #f3faf7, #fff);
+      border: 1px solid #b7ddd3;
       text-align: center;
     }
 
     .price {
-      font-size: 38px;
+      font-size: 2.35rem;
       font-weight: 800;
-      color: #007bff;
+      color: var(--accent);
       margin: 10px 0 4px;
+      letter-spacing: -0.03em;
     }
 
     .small {
-      font-size: 14px;
-      color: #6b7280;
+      font-size: 0.85rem;
+      color: var(--muted);
     }
 
     .footer {
       text-align: center;
-      color: #6b7280;
-      font-size: 13px;
+      color: var(--muted);
+      font-size: 0.85rem;
       padding: 28px 0 10px;
     }
 
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .footer-links a {
+      color: var(--accent-dark);
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { text-decoration: underline; }
+
     @media (max-width: 720px) {
-      h1 { font-size: 31px; }
       .hero { padding: 28px; }
       .card { padding: 24px; }
       .grid { grid-template-columns: 1fr; }
@@ -212,12 +267,7 @@
           Falar no WhatsApp agora
         </a>
 
-        <a
-          href="#demo"
-          class="button secondary"
-        >
-          Ver exemplo
-        </a>
+        <a href="#demo" class="button ghost">Ver exemplo</a>
       </div>
 
       <p class="note">Resposta rápida pelo WhatsApp. Sem compromisso. Acesso inicial por R$46/mês.</p>
@@ -332,10 +382,10 @@
     <section class="card">
       <h2>Como funciona</h2>
 
-      <p><strong>1.</strong> Você registra paciente, contexto e decisão clínica.</p>
-      <p><strong>2.</strong> O sistema organiza o histórico de forma simples.</p>
-      <p><strong>3.</strong> Você consulta os registros quando precisar revisar um caso.</p>
-      <p><strong>4.</strong> Tudo fica mais claro, documentado e rastreável.</p>
+      <p><strong style="color:var(--text)">1.</strong> Você registra paciente, contexto e decisão clínica.</p>
+      <p><strong style="color:var(--text)">2.</strong> O sistema organiza o histórico de forma simples.</p>
+      <p><strong style="color:var(--text)">3.</strong> Você consulta os registros quando precisar revisar um caso.</p>
+      <p><strong style="color:var(--text)">4.</strong> Tudo fica mais claro, documentado e rastreável.</p>
 
       <div class="button-row">
         <a
@@ -376,6 +426,11 @@
         Importante: este sistema ajuda na organização, documentação e rastreabilidade dos registros.
         Ele não substitui avaliação médica, prontuário oficial, obrigação ética ou orientação jurídica.
       </p>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacidade</a>
+        <a href="/terms.html">Termos</a>
+        <a href="/support.html">Suporte</a>
+      </div>
     </footer>
 
   </main>

@@ -67,13 +67,27 @@ function addField(container, label, value) {
   container.appendChild(group);
 }
 
+function renderEmptyState(title, description) {
+  const empty = document.createElement("div");
+  empty.className = "empty-state";
+  const icon = document.createElement("span");
+  icon.className = "empty-icon";
+  icon.setAttribute("aria-hidden", "true");
+  icon.textContent = "∅";
+  const heading = document.createElement("strong");
+  heading.textContent = title;
+  const text = document.createElement("p");
+  text.textContent = description;
+  empty.append(icon, heading, text);
+  return empty;
+}
+
 function renderCases(cases) {
   elements.historico.replaceChildren();
   if (!cases.length) {
-    const empty = document.createElement("p");
-    empty.className = "meta";
-    empty.textContent = "Nenhum registro encontrado nesta clínica.";
-    elements.historico.appendChild(empty);
+    elements.historico.appendChild(
+      renderEmptyState("Nenhum registro ainda", "Salve o primeiro caso à esquerda para começar o histórico desta clínica.")
+    );
     return;
   }
   cases.forEach((item) => {
@@ -99,8 +113,19 @@ function renderCases(cases) {
 async function carregarCasos() {
   elements.atualizar.disabled = true;
   try { renderCases(await api("/api/casos")); }
-  catch (error) { renderCases([]); feedback(elements.feedback, error.message, true); }
+  catch (error) {
+    elements.historico.replaceChildren(
+      renderEmptyState("Não foi possível carregar", error.message)
+    );
+    feedback(elements.feedback, error.message, true);
+  }
   finally { elements.atualizar.disabled = false; }
+}
+
+function setupPayload(form) {
+  const body = Object.fromEntries(new FormData(form));
+  if (body.uf) body.uf = String(body.uf).trim().toUpperCase();
+  return body;
 }
 
 elements.loginForm.addEventListener("submit", async (event) => {
@@ -117,7 +142,7 @@ elements.setupForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   feedback(elements.setupFeedback, "Criando ambiente…");
   try {
-    const body = Object.fromEntries(new FormData(elements.setupForm));
+    const body = setupPayload(elements.setupForm);
     saveSession(await api("/api/configuracao/inicial", { method: "POST", body: JSON.stringify(body) }));
     elements.setupForm.reset();
   } catch (error) { feedback(elements.setupFeedback, error.message, true); }

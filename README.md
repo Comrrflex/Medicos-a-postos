@@ -140,10 +140,28 @@ npm audit fix
 ## 🔮 Próximos Passos
 
 - Persistência em banco (PostgreSQL / MongoDB)  
-- Autenticação de usuários  
 - Logs estruturados de auditoria  
 - Versionamento de decisões clínicas  
-- Deploy em nuvem (Azure / SaaS)  
+- Hardening operacional pós-deploy  
+
+## Deploy (Railway / Render / Fly)
+
+Use Node 20 (imagem na raiz). Mount volume at /data. DATABASE_PATH=/data/clinical.db. Health: /health.
+
+### Plataformas
+Configure volume em /data e DATABASE_PATH em cada provedor de hospedagem.
+
+### Railway
+Volume /data, DATABASE_PATH, health /health.
+
+### Render
+Disco /data, DATABASE_PATH, health /health.
+
+### Fly.io
+Volume em /data, DATABASE_PATH, deploy.
+
+Sem volume persistente, o banco é perdido a cada redeploy. Veja SECURITY.md.
+O CI roda testes e smoke em /health.
 
 ## ChatGPT Apps SDK / MCP
 
