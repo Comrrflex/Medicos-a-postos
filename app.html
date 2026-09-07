@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>Área de registros | Médicos a Postos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@450;550;650;750;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/style.css" />
     <script src="/app.js" defer></script>
   </head>
@@ -41,13 +44,47 @@
         <form id="setup-form">
           <label for="setup-clinica">Nome da clínica</label>
           <input id="setup-clinica" name="clinica" maxlength="120" required />
+
+          <div class="form-grid">
+            <div class="full">
+              <label for="setup-telefone">Telefone da clínica</label>
+              <input id="setup-telefone" name="telefone" type="tel" maxlength="30" required autocomplete="tel" placeholder="(21) 99999-0000" />
+            </div>
+            <div>
+              <label for="setup-cidade">Cidade</label>
+              <input id="setup-cidade" name="cidade" maxlength="80" required autocomplete="address-level2" />
+            </div>
+            <div>
+              <label for="setup-uf">UF</label>
+              <input id="setup-uf" name="uf" maxlength="2" minlength="2" required pattern="[A-Za-z]{2}" placeholder="RJ" title="Sigla com 2 letras" style="text-transform: uppercase" />
+            </div>
+            <div class="full">
+              <label for="setup-especialidade">Especialidade principal</label>
+              <input id="setup-especialidade" name="especialidade" maxlength="80" required placeholder="Ex.: Clínica geral" />
+            </div>
+            <div class="full">
+              <label for="setup-cnpj">CNPJ <span class="optional">(opcional)</span></label>
+              <input id="setup-cnpj" name="cnpj" maxlength="18" inputmode="numeric" placeholder="00.000.000/0000-00" autocomplete="off" />
+            </div>
+            <div class="full">
+              <label for="setup-site">Site ou Instagram <span class="optional">(opcional)</span></label>
+              <input id="setup-site" name="site" maxlength="160" placeholder="https://… ou @clinica" autocomplete="url" />
+            </div>
+          </div>
+
           <label for="setup-nome">Seu nome</label>
           <input id="setup-nome" name="nome" maxlength="120" required autocomplete="name" />
+
+          <label for="setup-crm">CRM do administrador <span class="optional">(opcional)</span></label>
+          <input id="setup-crm" name="crm" maxlength="30" placeholder="CRM/UF 123456" autocomplete="off" />
+
           <label for="setup-email">E-mail</label>
           <input id="setup-email" name="email" type="email" required autocomplete="username" />
+
           <label for="setup-senha">Senha</label>
           <input id="setup-senha" name="senha" type="password" minlength="10" required autocomplete="new-password" />
-          <span class="meta">Use ao menos 10 caracteres.</span>
+          <p class="field-hint">Use ao menos 10 caracteres.</p>
+
           <button type="submit">Criar acesso seguro</button>
           <p id="setup-feedback" class="feedback" role="status" aria-live="polite"></p>
         </form>
@@ -89,7 +126,11 @@
           <button id="atualizar" class="secondary" type="button">Atualizar</button>
         </div>
         <div id="historico" class="history-list" aria-live="polite">
-          <p class="meta">Carregando registros…</p>
+          <div class="empty-state">
+            <span class="empty-icon" aria-hidden="true">…</span>
+            <strong>Carregando registros</strong>
+            <p class="meta">Aguarde um momento.</p>
+          </div>
         </div>
       </section>
     </main>

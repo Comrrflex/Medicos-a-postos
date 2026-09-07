@@ -1,0 +1,6 @@
+node_modules
+clinical.db
+clinical.db-*
+.env
+.git
+mcp-app/node_modules

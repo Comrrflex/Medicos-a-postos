@@ -85,6 +85,13 @@ const ready = (async () => {
   await addColumnIfMissing("casos", "deidentified INTEGER NOT NULL DEFAULT 0");
   await addColumnIfMissing("casos", "idempotency_key TEXT");
   await addColumnIfMissing("usuarios", "oauth_subject TEXT");
+  await addColumnIfMissing("usuarios", "crm TEXT");
+  await addColumnIfMissing("clinicas", "telefone TEXT");
+  await addColumnIfMissing("clinicas", "cidade TEXT");
+  await addColumnIfMissing("clinicas", "uf TEXT");
+  await addColumnIfMissing("clinicas", "especialidade TEXT");
+  await addColumnIfMissing("clinicas", "cnpj TEXT");
+  await addColumnIfMissing("clinicas", "site TEXT");
 
   await run(`CREATE TABLE IF NOT EXISTS auditoria (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
