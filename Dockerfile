@@ -8,7 +8,8 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+# Force compile against image glibc (prebuilds may require newer GLIBC than bookworm)
+RUN npm ci --omit=dev && npm rebuild sqlite3 --build-from-source
 
 COPY . .
 
